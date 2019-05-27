@@ -1,0 +1,164 @@
+<div class="card text-center">
+    <div class="tab">
+        <button class="tablinks" (click)="openAccount(event, 'myUsage')">My Usage</button>
+        <button class="tablinks" (click)="openAccount(event, 'myBill')">My Bill</button>
+        <button class="tablinks" (click)="openAccount(event, 'myPlan')">My Plan</button>
+    </div>
+    <div *ngFor="let account of accounts">
+        <!-- Tab content -->
+        <div id="myUsage" class="tabcontent">
+            <table>
+                <tr>
+                    <td>
+                        Amount
+                    </td>
+                    <td>
+                        {{ this.account.myUsage.amount }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        SMS Quota
+                    </td>
+                    <td>
+                        {{ this.account.myUsage.smsQuota }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        SMS Used
+                    </td>
+                    <td>
+                        {{ this.account.myUsage.usedSMS }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Internet Quota
+                    </td>
+                    <td>
+                        {{ this.account.myUsage.internetQuota }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Internet Used
+                    </td>
+                    <td>
+                        {{ this.account.myUsage.usedInternet }} {{ this.account.myUsage.dataUnit }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Internet Available
+                    </td>
+                    <td>
+                        {{ this.account.myUsage.availInternet }} {{ this.account.myUsage.dataUnit }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="myBill" class="tabcontent">
+            <table>
+                <tr>
+                    <td>
+                        Bill Number
+                    </td>
+                    <td>
+                        {{ this.account.myBill.billNumber }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Bill Date
+                    </td>
+                    <td>
+                        {{ this.account.myBill.billDate }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Monthly Charge
+                    </td>
+                    <td>
+                        {{ this.account.myBill.monthCharge }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Due Date
+                    </td>
+                    <td>
+                        {{ this.account.myBill.dueDate }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Bill Start Date
+                    </td>
+                    <td>
+                        {{ this.account.myBill.startDate }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Bill End Date
+                    </td>
+                    <td>
+                        {{ this.account.myBill.endDate }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="myPlan" class="tabcontent">
+            <table>
+                <tr>
+                    <td>
+                        My Plan Name
+                    </td>
+                    <td>
+                        {{ this.account.myPlan.name }}
+                    </td>
+                </tr>
+            </table>
+            <p><b>View Other Plans</b></p>
+            <div class="btn-group">
+                <button id='{{plan.id}}' (click)="showPacks(plan.packs, plan.name, plan.id)"
+                    *ngFor="let plan of this.plans">{{ plan.name }}</button>
+            </div>
+        </div>
+    </div>
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="#">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container">
+                <table class="key-value-table" summary="Example of a key value table.">
+                    <caption>{{ this.planName }}</caption>
+                    <tbody>
+                        <tr *ngFor="let recipient of pack | keyvalue">
+                            <th>{{recipient.key}}:</th>
+                            <td>{{recipient.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="subscribeNewPlan(this.planId)" type="submit">Subscribe</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+</div>

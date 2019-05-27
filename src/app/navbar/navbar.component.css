@@ -1,0 +1,22 @@
+/* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-color: #FF3368;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px
+  }
+  
+ .navbar .container {
+    width: 20%;
+    margin: 0 auto;
+  }
+
+  /* Links inside the navbar */
+  .navbar .container label {
+    float: left;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+  }
