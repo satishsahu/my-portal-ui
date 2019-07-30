@@ -1,5 +1,42 @@
-<nav class="navbar navbar-dark bg-primary mb-4">
-  <div class="navbar container">
+<nav class="login-navbar navbar-dark bg-primary mb-4">
+  <div class="login-navbar container">
+    <div *ngFor="let account of accounts">
+        <label class="navbar-brand"><b>satish</b></label>
+    </div>
+    
     <label class="navbar-brand"><b>My Telecom Portal</b></label>
+    <button (click)="openLoginModalForm()" style="width:auto;">Login</button>
+    <div id="loginFormId" class="login-navbar modal">
+
+      <form class="loginForm animate" #loginForm="ngForm" (submit)="onSubmit(loginForm.value)" action="">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('loginFormId').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+          <img src="img_avatar2.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="loginContainer">
+          <label for="userName"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="userName" ngModel required>
+
+          <label for="mobile"><b>Mobile</b></label>
+          <input type="text" placeholder="Enter Mobile" name="mobile" ngModel required>
+
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" ngModel required>
+
+          <button type="submit" value = "submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('loginFormId').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
+    </div>
   </div>
 </nav>

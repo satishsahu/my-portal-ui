@@ -12,18 +12,22 @@ export class AccountService implements OnInit{
   }
 
   accounts: Account[];
-  accountUrl: string = "http://aa504a575811011e996000a75b12f01e-299214544.us-east-1.elb.amazonaws.com:8181/myPhone/9888888889";
+  accountUrl: string = "http://localhost:8181/myPhone/9888888889";
   newPlanUrl: string;
   account:Account;
 
   constructor(private http: HttpClient) { }
 
-  getAccounts(): Observable<Account[]>{
-    return this.http.get<Account[]>(this.accountUrl);
+  getAccounts(): Account[]{
+    return this.accounts;
+  }
+
+  setAccounts(accounts: Account[]) {
+    this.accounts = accounts;
   }
 
   subscribeNewPlan(accountId: number, planId: number): Observable<Account>{
-    this.newPlanUrl = "http://aa504a575811011e996000a75b12f01e-299214544.us-east-1.elb.amazonaws.com:8181/update/account/"+accountId+"/plan/"+planId;
+    this.newPlanUrl = "http://localhost:8181/update/account/"+accountId+"/plan/"+planId;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.put<Account>(this.newPlanUrl, JSON.stringify(this.account));

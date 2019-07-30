@@ -1,0 +1,10 @@
+.my-background {
+    background-image: url("http://localhost:8181/background.jpg");
+    /* Full height */
+    height: 550px; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

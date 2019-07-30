@@ -3,6 +3,7 @@ import { AccountService } from '../account.service';
 import { UpdatePlan } from './updatePlan.module';
 import { Account } from './account.module';
 import { Plan } from './plan.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -18,16 +19,19 @@ export class AccountComponent implements OnInit {
   planName: string;
   planId: number;
   accountId: number;
-  constructor(private accountService: AccountService) { }
+  public redirectUrl: string = "/account";
+  constructor(private accountService: AccountService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.accountService.getAccounts().subscribe(
-      accounts => {
-        this.accounts = accounts;
-        this.accounts.forEach(account => {
-          this.plans = account.myPlan.allPlans;
-        });
-      });
+    this.accounts = this.accountService.getAccounts();
+    this.accounts.forEach(account => {
+      this.plans = account.myPlan.allPlans;
+    });
+  }
+
+  setAccounts(accounts: Account[]) {
+    this.accounts = accounts;
   }
 
   openAccount(evt, cityName) {
@@ -53,18 +57,22 @@ export class AccountComponent implements OnInit {
   }
 
   subscribeNewPlan(planId: number) {
-    console.log("planId: "+planId);
+    console.log("planId: " + planId);
     this.planId = planId;
     this.accounts.forEach(account => {
       this.accountId = account.id;
     });
-    console.log("planId: "+this.planId+" > "+this.accountId);
+    console.log("planId: " + this.planId + " > " + this.accountId);
     this.accountService.subscribeNewPlan(this.accountId, this.planId).subscribe(
       account => {
         this.updatePlan = account;
-        console.log("## "+this.updatePlan.myPlan.name);
+        console.log("## " + this.updatePlan.myPlan.name);
         this.planName = account.myPlan.name;
+        if (this.redirectUrl) {
+          this.router.navigate([this.redirectUrl]);
+          this.redirectUrl = null;
+        }
       });
-      document.getElementById('id01').style.display='none';
+    document.getElementById('id01').style.display = 'none';
   }
 }
